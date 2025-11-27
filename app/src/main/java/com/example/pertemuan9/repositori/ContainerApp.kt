@@ -1,5 +1,6 @@
 package com.example.pertemuan9.repositori
 
+import android.app.Application
 import android.content.Context
 import com.example.pertemuan9.room.DatabaseSiswa
 
@@ -16,3 +17,16 @@ class ContainerDataApp(private val context: Context):
     }
 }
 
+class AplikasiSiswa : Application() {
+    /**
+     * appcontainer instance digunakan oleh kelas kelas lainnya
+     * untuk mendapatkan dpendensi
+     */
+
+    lateinit var container: ContainerApp
+
+    override  fun onCreate(){
+        super.onCreate()
+        container = ContainerDataApp(this)
+    }
+}
