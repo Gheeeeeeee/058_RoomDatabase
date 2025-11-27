@@ -4,28 +4,25 @@ import android.app.Application
 import android.content.Context
 import com.example.pertemuan9.room.DatabaseSiswa
 
-interface ContainerApp {
+interface ContainerApp{
     val repositoriSiswa : RepositoriSiswa
 }
 
 class ContainerDataApp(private val context: Context):
-        ContainerApp {
+    ContainerApp {
     override val repositoriSiswa: RepositoriSiswa by lazy {
         OfflineRepositoriSiswa(
-            DatabaseSiswa.getDatabase(context).siswaDao()
-        )
+            DatabaseSiswa.getDatabase(context).siswaDao())
     }
 }
 
 class AplikasiSiswa : Application() {
     /**
-     * appcontainer instance digunakan oleh kelas kelas lainnya
-     * untuk mendapatkan dpendensi
+     * AppContainer instance digunakan oleh kelas-kelas lainnya untuk mendapatkan dependensi
      */
-
     lateinit var container: ContainerApp
 
-    override  fun onCreate(){
+    override fun onCreate() {
         super.onCreate()
         container = ContainerDataApp(this)
     }
